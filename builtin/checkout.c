@@ -360,6 +360,10 @@ static int checkout_worktree(const struct checkout_opts *opts,
 	state.refresh_cache = 1;
 	state.istate = &the_index;
 
+	init_checkout_metadata(&state.meta, info->path,
+			       info->commit ? &info->commit->object.oid : NULL,
+			       NULL);
+
 	enable_delayed_checkout(&state);
 	for (pos = 0; pos < active_nr; pos++) {
 		struct cache_entry *ce = active_cache[pos];
